@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import flask
 import werkzeug
-from helper import check_if_face, db_verify, new_user, helper_geta
+from helper import check_if_face, db_verify, new_user, helper_geta, detect_faces
 
 app = Flask(__name__)
 
@@ -28,7 +28,7 @@ def return_atten():
 @app.route("/posts_info", methods = ['POST'])
 def post_info():
     data = flask.request.json
-    if new_user(data):
+    if new_user(data, False):
         return jsonify("OK")
     else:
         return jsonify("not OK")
@@ -40,7 +40,18 @@ def verify():
     result = db_verify(username, password)
     
     return jsonify(result)
-    
 
+@app.route("/mark_a", methods = ['POST'])
+def mark_a():
+    files_ids = list(flask.request.files)
+    file_id = files_ids[0]   
+    imagefile = flask.request.files[file_id]
+    filename = werkzeug.utils.secure_filename(imagefile.filename)
+    imagefile.save(filename)
+    sub = request.args.get("subject")
+    detect_faces(sub, filename)
+    return jsonify("ok")
+    
+    
 if __name__ == "__main__":
     app.run(host = '192.168.43.165', port = 5000, threaded = False)

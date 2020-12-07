@@ -53,7 +53,7 @@ def check_if_face(imagepath):
         h+=10
         _slice = image[y:y+h, x:x+w,:]
         _slice = cv2.resize(_slice, (256,256))
-        cv2.imwrite(imagepath, _slice)
+        cv2.imwrite(imagepath[:-4]+"_1.jpg", _slice)
         return True
     else:
         os.remove(imagepath)
@@ -71,7 +71,7 @@ def db_verify(username, password):
 def new_user(student, remove_image):
     imagepath = student['image_path']
     student.pop('image_path', 'no key')
-    img = cv2.imread(imagepath)
+    img = cv2.imread(imagepath[:-4]+"_1.jpg")
     img = model.predict(img[np.newaxis, :]).flatten() # img = model.predict(img)
     img = img.tostring()
     student['face_encodings'] = img
@@ -140,6 +140,7 @@ def mark_attendance(cur_lecture, detected_faces):
         curr[i]['total_lectures']+=1;
         
         db.subjects.update_one({'uid':uid}, {"$set":{"subjects":curr}})
+
 
 
 
