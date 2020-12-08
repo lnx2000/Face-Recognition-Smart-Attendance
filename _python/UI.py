@@ -33,7 +33,7 @@ class App(object):
             sample_file = open(self.path, "rb")
             upload_file = {"Uploaded file": sample_file}
             sub = self.txt.get("1.0", "end-1c")
-            url = "http://192.168.43.165:5000/mark_a?subject="+sub
+            url = "http://192.168.1.8:5000/mark_a?subject="+sub
             r = requests.post(url, files = upload_file) 
         
    
