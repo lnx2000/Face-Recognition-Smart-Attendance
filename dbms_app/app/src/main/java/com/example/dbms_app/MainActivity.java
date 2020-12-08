@@ -1,4 +1,4 @@
-package com.example.dbms_app;
+    package com.example.dbms_app;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,8 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,10 +48,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Server {
 
     ImageView iv;
-    EditText nameet, addet, classet, uidet, usernameet, passwordet;
+    TextInputEditText nameet, addet, classet, uidet, usernameet, passwordet;
     boolean imageok = false;
     Intent i;
     Context context;
@@ -56,11 +63,14 @@ public class MainActivity extends AppCompatActivity {
     MaterialButton submit;
     Connect connect = Launcher.connect;
 
+    public static ConstraintLayout constraintLayout1;
+
     @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        constraintLayout1 = findViewById(R.id.constraint1);
         sp = getSharedPreferences(prefs, MODE_PRIVATE);
         editor = sp.edit();
 
@@ -80,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         iv.setOnClickListener(v -> {
             if (!imageok) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                cameraIntent.putExtra("crop", "true");
+                //cameraIntent.putExtra("crop", "true");
                 cameraIntent.putExtra("aspectX", 0);
                 cameraIntent.putExtra("aspectY", 0);
                 cameraIntent.putExtra("outputX", 150);
@@ -98,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
             String uid = uidet.getText().toString();
             String password = get_SHA1(passwordet.getText().toString());
             String username = usernameet.getText().toString();
-
             Student student = new Student(name, _class, add, uid, username, password, filename);
             post_info(student);
         });

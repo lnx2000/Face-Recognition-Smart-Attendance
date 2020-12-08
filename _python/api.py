@@ -28,7 +28,7 @@ def return_atten():
 @app.route("/posts_info", methods = ['POST'])
 def post_info():
     data = flask.request.json
-    if new_user(data):
+    if new_user(data,False):
         return jsonify("OK")
     else:
         return jsonify("not OK")
@@ -43,4 +43,4 @@ def verify():
     
 
 if __name__ == "__main__":
-    app.run(host = '192.168.43.165', port = 5000, threaded = False)
+    app.run(host = '192.168.1.8', port = 5000, threaded = False)

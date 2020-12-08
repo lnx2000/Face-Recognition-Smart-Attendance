@@ -1,5 +1,8 @@
 package com.example.dbms_app;
 
+import android.graphics.Bitmap;
+import android.graphics.Camera;
+
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -22,13 +25,13 @@ interface Requests {
     );
 
     @POST("posts_info")
-    Call<String> postinfo(@Body Student stundent);
+    Call<String> postinfo(@Body Student student);
 
     @GET("verify")
     Call<String> verify(
             @Query("username") String username,
             @Query("password") String password
     );
-
-
+    @GET("student_image")
+    Call<Bitmap> getStudentImage();
 }

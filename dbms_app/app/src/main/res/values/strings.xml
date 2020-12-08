@@ -9,7 +9,7 @@
     <string name="login">Login</string>
     <string name="name">NAME</string>
     <string name="address">ADDRESS</string>
-    <string name="uid">UID (C2K__)</string>
+    <string name="uid">UID</string>
     <string name="submit">Submit</string>
     <string name="signIn">Signing In…</string>
     <string name="subject_name">Subject Name</string>

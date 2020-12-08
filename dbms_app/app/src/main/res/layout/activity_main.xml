@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,12 +12,14 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:cardBackgroundColor="@color/onCardBackgound"
+        app:cardBackgroundColor="@color/onCardBackground"
         app:cardCornerRadius="50dp"
+        android:elevation="1dp"
         app:layout_constraintBottom_toTopOf="@id/cardView1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cardView1">
+        app:layout_constraintTop_toTopOf="@id/cardView1"
+        tools:targetApi="lollipop">
 
         <TextView
             android:layout_width="match_parent"
@@ -29,7 +33,8 @@
             android:id="@+id/iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="Add Image"/>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -90,7 +95,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="50dp"
             android:fillViewport="true"
-            android:overScrollMode="never">
+            android:overScrollMode="ifContentScrolls">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,108 +111,167 @@
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/nameEditText"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:backgroundTint="@color/drawableTint"
-                    android:drawableRight="@drawable/ic_account_circle"
-                    android:drawableTint="@color/drawableTint"
+                    android:layout_marginEnd="20dp"
+                    app:boxStrokeColor="@color/text_input_box_stroke"
+                    android:theme="@style/CardView"
+                    app:hintTextColor="@color/bglight"
                     android:hint="@string/name"
-                    android:padding="15dp"
                     android:textColor="@color/headings"
                     android:textColorHint="@color/drawableTint"
                     android:textStyle="bold"
-                    tools:targetApi="m" />
-                <!--android:background="@android:color/transparent" -->
+                    app:endIconMode="custom"
+                    app:shapeAppearance="@style/Cut"
+                    android:focusedByDefault="false"
+                    app:endIconDrawable="@drawable/ic_account_circle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    tools:targetApi="o">
 
-                <EditText
-                    android:id="@+id/uNameEditText"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:backgroundTint="@color/drawableTint"
-                    android:drawableTint="@color/drawableTint"
+                    android:layout_marginEnd="20dp"
+                    app:boxStrokeColor="@color/text_input_box_stroke"
+                    app:hintTextColor="@color/bglight"
                     android:hint="@string/username"
-                    android:padding="15dp"
                     android:textColor="@color/headings"
                     android:textColorHint="@color/drawableTint"
                     android:textStyle="bold"
-                    tools:targetApi="m" />
+                    app:endIconMode="custom"
+                    app:shapeAppearance="@style/Cut"
+                    android:focusedByDefault="false"
+                    app:endIconDrawable="@drawable/ic_account_circle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    tools:targetApi="o">
 
-                <EditText
-                    android:id="@+id/passwordEditText"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/uNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordTextLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:autofillHints="@string/password"
-                    android:backgroundTint="@color/drawableTint"
-                    android:drawableRight="@drawable/ic_password_lock"
-                    android:drawableTint="@color/drawableTint"
+                    app:boxStrokeColor="@color/text_input_box_stroke"
+                    app:hintTextColor="@color/bglight"
+                    android:layout_marginEnd="20dp"
                     android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:padding="15dp"
                     android:textColor="@color/headings"
+                    android:focusedByDefault="false"
                     android:textColorHint="@color/drawableTint"
                     android:textStyle="bold"
-                    tools:targetApi="m" />
+                    app:shapeAppearance="@style/Cut"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_password_lock"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    tools:targetApi="o">
 
-                <EditText
-                    android:id="@+id/classEditText"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/passwordEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:backgroundTint="@color/drawableTint"
-                    android:drawableTint="@color/drawableTint"
+                    app:boxStrokeColor="@color/text_input_box_stroke"
+                    app:hintTextColor="@color/bglight"
+                    android:layout_marginEnd="20dp"
                     android:hint="CLASS"
-                    android:padding="15dp"
                     android:textColor="@color/headings"
+                    android:focusedByDefault="false"
                     android:textColorHint="@color/drawableTint"
                     android:textStyle="bold"
-                    tools:targetApi="m" />
+                    app:shapeAppearance="@style/Cut"
+                    app:endIconMode="custom"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    tools:targetApi="o">
 
-                <EditText
-                    android:id="@+id/addrEditText"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/classEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:backgroundTint="@color/drawableTint"
-                    android:drawableRight="@drawable/ic_address"
-                    android:drawableTint="@color/drawableTint"
+                    app:boxStrokeColor="@color/text_input_box_stroke"
+                    app:hintTextColor="@color/bglight"
+                    android:layout_marginEnd="20dp"
                     android:hint="@string/address"
-                    android:inputType="textPostalAddress"
-                    android:padding="15dp"
                     android:textColor="@color/headings"
+                    android:focusedByDefault="false"
                     android:textColorHint="@color/drawableTint"
                     android:textStyle="bold"
-                    tools:targetApi="m" />
+                    app:shapeAppearance="@style/Cut"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_address"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    tools:targetApi="o">
 
-                <EditText
-                    android:id="@+id/uidEditText"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addrEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPostalAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:backgroundTint="@color/drawableTint"
-                    android:drawableTint="@color/drawableTint"
+                    app:boxStrokeColor="@color/text_input_box_stroke"
+                    app:hintTextColor="@color/bglight"
+                    android:layout_marginEnd="20dp"
                     android:hint="@string/uid"
-                    android:padding="15dp"
                     android:textColor="@color/headings"
+                    android:focusedByDefault="false"
                     android:textColorHint="@color/drawableTint"
                     android:textStyle="bold"
-                    tools:targetApi="m" />
+                    app:shapeAppearance="@style/Cut"
+                    app:endIconMode="custom"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    tools:targetApi="o">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/uidEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signUp"
@@ -218,7 +282,8 @@
                     android:layout_marginBottom="20dp"
                     android:backgroundTint="@color/bgdark"
                     android:text="Sign Up"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    tools:targetApi="lollipop" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

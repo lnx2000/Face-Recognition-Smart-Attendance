@@ -16,8 +16,10 @@ general = [{"sub_name":"CN", "total_lectures":0, "attended_lectures": 0},
               {"sub_name":"SDL", "total_lectures":0, "attended_lectures": 0}]
 
 
-client = pymongo.MongoClient('localhost',27017)
+client = pymongo.MongoClient(host = 'localhost',port = 27017)
 db = client.dbms_database
+print('Database Created')
+#print(client.list_database_names())
 model = InceptionV3()
 
 
@@ -53,7 +55,7 @@ def check_if_face(imagepath):
         h+=10
         _slice = image[y:y+h, x:x+w,:]
         _slice = cv2.resize(_slice, (256,256))
-        cv2.imwrite(imagepath, _slice)
+        cv2.imwrite(imagepath[:-4]+"_1.jpg", _slice)
         return True
     else:
         os.remove(imagepath)
@@ -71,7 +73,7 @@ def db_verify(username, password):
 def new_user(student, remove_image):
     imagepath = student['image_path']
     student.pop('image_path', 'no key')
-    img = cv2.imread(imagepath)
+    img = cv2.imread(imagepath[:-4]+"_1.jpg")
     img = model.predict(img[np.newaxis, :]).flatten() # img = model.predict(img)
     img = img.tostring()
     student['face_encodings'] = img

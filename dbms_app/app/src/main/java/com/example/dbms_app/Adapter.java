@@ -1,6 +1,7 @@
 package com.example.dbms_app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     ArrayList<Subjects> subjects;
 
+    //Constructor
     public Adapter(Context context, ArrayList<Subjects> subjects) {
         this.context = context;
         this.subjects = subjects;
@@ -44,13 +50,14 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         svh.total.setText(String.format(Locale.ENGLISH,"Total: %d", total));
         svh.attended.setText(String.format(Locale.ENGLISH,"Attended: %d", att));
         svh.percent.setText(String.format(Locale.ENGLISH,"%.2f %s",percent,"%"));
-        }
+    }
 
     @Override
     public int getItemCount() {
         return subjects.size();
     }
-    public class subViewHolder extends RecyclerView.ViewHolder{
+
+    public static class subViewHolder extends RecyclerView.ViewHolder{
         TextView subject, total, attended, percent;
         public subViewHolder(@NonNull View itemView) {
             super(itemView);

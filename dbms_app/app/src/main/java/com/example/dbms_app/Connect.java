@@ -1,14 +1,11 @@
 package com.example.dbms_app;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.util.Log;
+import android.os.Build;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,12 +24,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Connect {
+public class Connect implements Server {
     Retrofit retrofit;
     Requests requests;
 
     public Connect() {
-        retrofit = new Retrofit.Builder().baseUrl("http://192.168.43.165:5000/").addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(serverURL).addConverterFactory(GsonConverterFactory.create()).build();
         requests = retrofit.create(Requests.class);
     }
     public void verify(String username, String password, Context context){
@@ -57,7 +54,6 @@ public class Connect {
         });
     }
     public void upload_image(Bitmap bitmap, Context context, String filename) {
-
         final Bitmap fbitmap = Bitmap.createScaledBitmap(bitmap, 150, 200, true);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -67,7 +63,7 @@ public class Connect {
         try {
             f.createNewFile();
         } catch (IOException e) {
-            Toast.makeText(context, "An error occure while reading image :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "An error occurred while reading image :(", Toast.LENGTH_SHORT).show();
         }
 
         FileOutputStream fos = null;
@@ -81,7 +77,7 @@ public class Connect {
             fos.flush();
             fos.close();
         } catch (IOException e) {
-            Toast.makeText(context, "Unknown error occured :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Unknown error occurred :(", Toast.LENGTH_SHORT).show();
         }
 
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), f);
@@ -103,7 +99,9 @@ public class Connect {
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(context, "Error while uploading image\n" + "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar.make(MainActivity.constraintLayout1,"Error while uploading image",Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                //Toast.makeText(context, "Error while uploading image\n" + "Please check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -124,7 +122,7 @@ public class Connect {
 
                 }
             });
-        }
+    }
     public void get_attendance(String uid, Callbacks callback, Context context) {
 
         ArrayList<Subjects> subjects = new ArrayList<>();
@@ -137,7 +135,6 @@ public class Connect {
                     subjects.clear();
                     subjects.addAll(subjectsList);
                     callback.OnGetSuccess(subjects);
-
                 }
             }
 

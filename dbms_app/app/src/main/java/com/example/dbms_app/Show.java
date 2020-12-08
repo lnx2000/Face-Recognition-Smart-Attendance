@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,9 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,11 +40,13 @@ public class Show extends AppCompatActivity {
     Callbacks callback;
     ArrayList<Subjects> subjects;
     SharedPreferences sp;
-    ImageView logout;
+    ImageView logout,studentImage;
     TextView uidtv;
-    private String prefs = "MYPREFS";
+    private final String prefs = "MYPREFS";
     Connect connect = Launcher.connect;
     Context context ;
+    Adapter adapter;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +57,19 @@ public class Show extends AppCompatActivity {
         srl = findViewById(R.id.refresh);
         logout = findViewById(R.id.logout);
         rv = findViewById(R.id.rv);
+        studentImage = findViewById(R.id.studentImage);
+
 
         context = this;
         subjects = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
-        Adapter adapter = new Adapter(this, subjects);
+        adapter = new Adapter(this, subjects);
         rv.setAdapter(adapter);
 
         sp = getSharedPreferences(prefs, MODE_PRIVATE);
-        String uid = sp.getString("uid", "");
+        uid = sp.getString("uid", "");
         uidtv.setText(uid.toUpperCase());
-
 
         callback = subs -> {
             subjects.clear();
@@ -74,9 +82,35 @@ public class Show extends AppCompatActivity {
             srl.setRefreshing(false);
         });
 
-        connect.get_attendance(uid,callback,context);
+        loadAttendance();
         logout.setOnClickListener(v -> log_out());
+    }
 
+    public void loadAttendance(){
+        if(!checkConnection()) {
+            Gson gson = new Gson();
+            String json = sp.getString("Json", "");
+            if (json.length() != 0) {
+                Type type = new TypeToken<ArrayList<Subjects>>() {
+                }.getType();
+                ArrayList<Subjects> backup = gson.fromJson(json, type);
+                rv.setAdapter(new Adapter(this, backup));
+                adapter.notifyDataSetChanged();
+            }
+        }
+        else{
+            connect.get_attendance(uid,callback,context);
+            adapter.notifyDataSetChanged();
+        }
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences.Editor editor1 = sp.edit();
+        Gson gson1 = new Gson();
+        String json1 = gson1.toJson(subjects);
+        editor1.putString("Json",json1);
+        editor1.apply();
     }
 
     public void log_out(){
@@ -88,5 +122,9 @@ public class Show extends AppCompatActivity {
         Intent i = new Intent(Show.this, Launcher.class);
         startActivity(i);
         finish();
+    }
+    private boolean checkConnection(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }
