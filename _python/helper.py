@@ -147,3 +147,4 @@ def mark_attendance(cur_lecture, detected_faces):
 
 
 
+
