@@ -1,11 +1,6 @@
-from tkinter import Frame,Button,Label,Toplevel,Canvas,Tk,Text
+from tkinter import Frame,Button,Label,Canvas,Tk,Text
 from tkinter.filedialog import askopenfilename
 from PIL import Image,ImageTk
-import matplotlib.pyplot as plt
-from flask import Flask,request
-import cv2
-import os
-from helper import check_if_face,detect_faces
 import requests
 
 
@@ -16,10 +11,11 @@ class App(object):
     
     def importImageFile(self):
         self.imageCanvas.delete('all')
-        path = askopenfilename(initialdir = 'D:/Photos',filetypes = [('All Images',['*.jpeg','*.jpg','*.png'])])
+        path = askopenfilename(filetypes = [('All Images',['*.jpeg','*.jpg','*.png'])])
         if path:
             self.path = path
             img = Image.open(path)
+            img = img.resize((650, 400), Image.ANTIALIAS)
             self.imageCanvas.image = ImageTk.PhotoImage(img)
             self.imageCanvas.create_image(400,200,anchor = 'center',image=self.imageCanvas.image)
         
@@ -61,7 +57,7 @@ class App(object):
         self.inputtxt.grid(row = 0, column = 1, pady = 5)
         
         self.txt = Text(self.buttonFrame, height = 1, width = 10) 
-        self.txt.grid(row = 0, column = 2, pady = 5)
+        self.txt.grid(row = 0, column = 2, padx= 5, pady = 5)
         
        
         

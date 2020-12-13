@@ -49,7 +49,7 @@ public class Connect implements Server {
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Toast.makeText(context, "Cannot connect to server..", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -99,9 +99,7 @@ public class Connect implements Server {
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Snackbar snackbar = Snackbar.make(MainActivity.constraintLayout1,"Error while uploading image",Snackbar.LENGTH_SHORT);
-                snackbar.show();
-                //Toast.makeText(context, "Error while uploading image\n" + "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error while uploading image\n" + "Please check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }

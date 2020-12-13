@@ -40,7 +40,7 @@ public class Show extends AppCompatActivity {
     Callbacks callback;
     ArrayList<Subjects> subjects;
     SharedPreferences sp;
-    ImageView logout,studentImage;
+    ImageView logout;
     TextView uidtv;
     private final String prefs = "MYPREFS";
     Connect connect = Launcher.connect;
@@ -57,7 +57,6 @@ public class Show extends AppCompatActivity {
         srl = findViewById(R.id.refresh);
         logout = findViewById(R.id.logout);
         rv = findViewById(R.id.rv);
-        studentImage = findViewById(R.id.studentImage);
 
 
         context = this;
