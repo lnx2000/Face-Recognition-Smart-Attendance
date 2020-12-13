@@ -1,6 +1,6 @@
 # Smart_Attendance_Management_App
 
-[face_recognition_model](https://drive.google.com/file/d/1EJnMNjI4fCBkewhpUShoGx9uZNw9uIQ7/view?usp=sharing) 
+[face_recognition_model](https://drive.google.com/file/d/1EJnMNjI4fCBkewhpUShoGx9uZNw9uIQ7/view?usp=sharing)   
 [Trained model notebook](https://www.kaggle.com/omkaramilkanthwar/face-model)
 
 # Screenshots
