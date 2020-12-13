@@ -4,7 +4,7 @@
 [Trained model notebook](https://www.kaggle.com/omkaramilkanthwar/face-model)
 
 # Screenshots
-<img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/login_dark.jpg" height="400">      <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/login_light.jpg" height="400">      <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/signup_dark.jpg" height="400">      <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/signup_light.jpg" height="400">
+<img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/login_dark.jpg" height="400">      <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/login_light.jpg" height="400">      <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/signup_dark.jpg" height="400">      <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/signup_light.jpg" height="400">     <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/a_dark.jpg" height="400">     <img src="https://github.com/lnx2000/Smart_Attendance_Management_App/blob/master/images/a_light.jpg" height="400">
 
 # Usage
 * Install Dependencies  
