@@ -1,5 +1,9 @@
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+tf.get_logger().setLevel('ERROR')
 import tensorflow.keras.layers as layers
 import tensorflow.keras.models as models
+
 
 def conv2d_bn(x,
               filters,

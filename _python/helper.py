@@ -32,11 +32,10 @@ def insert_student(s):
     db.subjects.insert_one(di)
     
     return True
-    
+
 def check_if_face(imagepath):
     image = cv2.imread(imagepath)
     
-    print(imagepath)
     img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     detector = MTCNN()
     
@@ -87,7 +86,6 @@ def similarities(image, images):
     image = image.flatten()
     return np.sqrt(np.mean(pow(np.array(image)-np.array(images), 2)))
 
-    
 def detect_faces(cur_lecture, img_path):
     img = db.students.find({}, {'face_encodings':1, '_id':0})
     faces = []
