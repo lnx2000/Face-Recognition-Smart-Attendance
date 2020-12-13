@@ -2,7 +2,7 @@ package com.example.dbms_app;
 
 
 public interface Server {
-    String serverURL = "http://192.168.1.8:5000/";
+    String serverURL = "http://192.168.43.165:5000/";
 //    static boolean checkServer(){
 //        final boolean[] result = new boolean[1];
 //        AsyncTask.execute(() -> {

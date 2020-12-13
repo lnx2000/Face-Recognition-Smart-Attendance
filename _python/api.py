@@ -6,8 +6,8 @@ from helper import check_if_face, db_verify, new_user, helper_geta, detect_faces
 app = Flask(__name__)
 
 
-@app.route('/posts_image',  methods = ['POST'])
-def method():
+@app.route('/post_image',  methods = ['POST'])
+def post_image():
     files_ids = list(flask.request.files)
     file_id = files_ids[0]   
     imagefile = flask.request.files[file_id]
@@ -19,13 +19,13 @@ def method():
     else:
         return jsonify("No face detected")
     
-@app.route('/get_attendance', methods = ['GET'])
+@app.route('/get_a', methods = ['GET'])
 def return_atten():
     uid = request.args.get("uid")
     sub = helper_geta(uid);
         
     return jsonify(sub)
-@app.route("/posts_info", methods = ['POST'])
+@app.route("/post_info", methods = ['POST'])
 def post_info():
     data = flask.request.json
     if new_user(data, False):

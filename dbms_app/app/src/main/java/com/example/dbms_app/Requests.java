@@ -16,15 +16,15 @@ import retrofit2.http.Query;
 
 interface Requests {
     @Multipart
-    @POST("posts_image")
+    @POST("post_image")
     Call<String> postimage(@Part MultipartBody.Part image_file);
 
-    @GET("get_attendance")
+    @GET("get_a")
     Call<List<Subjects>> get_attendance(
             @Query("uid") String uid
     );
 
-    @POST("posts_info")
+    @POST("post_info")
     Call<String> postinfo(@Body Student student);
 
     @GET("verify")
