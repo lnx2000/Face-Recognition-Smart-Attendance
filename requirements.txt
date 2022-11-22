@@ -4,6 +4,6 @@ numpy
 opencv-python
 tensorflow==2.1.2
 tk
-Pillow==2.2.2
+Pillow==9.3.0
 matplotlib
 
